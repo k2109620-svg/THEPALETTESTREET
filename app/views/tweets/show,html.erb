@@ -1,0 +1,11 @@
+<h1>THE PALETTE STREET</h1>
+<h3>曲の詳細</h3>
+<div class="tweet">
+  <p><%= @tweet.body %></p>
+  <p><%= @tweet.created_at %></p>
+</div>
+
+<%= link_to "曲一覧に戻る", tweets_path %>
+<% @tweet.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+<% end %>

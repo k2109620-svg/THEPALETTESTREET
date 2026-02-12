@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag 'index', :media => "all" %>
+<div class="tweets-container">
+<h3>曲一覧</h3>
+<%= link_to "新規投稿へ", new_tweet_path %>
+<div class="tweets-container">
+  <% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+  <% end %>
+  <% @tweets.each do |t| %>
+    <div class="tweet">
+      <% if t.image.attached? %>
+          <%= image_tag t.image, size: '250x200'%>
+      <% end %>
+
+
+      <%= t.user.email %>
+      <%= t.songtitle %>
+      <%= t.jacket %>
+      <%= t.lyrics %>
+      <%= t.time %>
+      <%= link_to "詳細へ", tweet_path(t.id) %>
+      <%= link_to "編集する", edit_tweet_path(t.id) %>
+      <%= link_to "削除する", tweet_path(t.id), data: { turbo_method: :delete } %>
+    </div>
+  <% end %>
+</div>
+<%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
+    <% Tag.all.each do |t| %>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+    <% end %>
+    <%= submit_tag '検索' %>
+<% end %>
+<%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
+    <%= text_field_tag :tag %>
+    <%= submit_tag 'タグを追加' %>
+<% end %>

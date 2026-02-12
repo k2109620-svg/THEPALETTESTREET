@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag 'new', :media => "all" %>
+<div class="post-container">
+  <p class="title">曲の投稿</p>
+  <%= form_for(@tweet, :url => { controller:'tweets', action:'create'})do |f| %>
+  <div class="field">
+    <%= f.label :曲名 %>
+      <%= f.text_field :songtitle, :size => 30 %>
+      <br>
+      <br>
+    </div>
+  <div class="field">
+    <%= f.label :画像 %>
+    <br>
+     <%= f.file_field :image %>
+     <br>
+     <br>
+  </div>
+  <div class="field">
+    <%= f.label :時間 %>
+    <%= f.text_field :time, :size => 30 %>
+    <br>
+    <br>
+  </div>
+  <div class="field">
+    <%= f.label :歌詞 %>
+    <br>
+    <%= f.text_area :lyrics, :size => "30x2" %>
+    <br>
+    <br>
+  </div>
+  <div class='form-group'>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+          <div class='form-check'>
+              <%= tag.label class: 'form-check-label' do %>
+                  <%= tag.check_box class: 'form-check-input' %>
+                  <%= tag.text %>
+              <% end %>
+          </div>
+      <% end %>
+  </div>
+
+  <%= f.submit "曲を投稿する" %>
+<% end %>
+
+<%= link_to "TOPに戻る", tweets_path %>
