@@ -1,3 +1,43 @@
+.top-image {
+  text-align: center;   
+}
+
+.top-image img {
+  width: 965px;
+  height: 1024px;
+  object-fit: cover;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 43px;
+  padding-right: 43px;
+  padding-top: 150px;
+}
+.layout {
+  display: flex;
+  align-items: flex-start;
+}
+.sidebar a {
+  display: block;
+  background: -moz-linear-gradient(left, #2C6CBF, #153259);
+  background: -webkit-linear-gradient(left, #2C6CBF, #153259);
+  background: linear-gradient(to right, #2C6CBF, #153259);
+  color: white;
+  padding: 12px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  text-align: center;
+  width: 180px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar a:hover {
+  background-color: #155bcc;
+}
+
 .tweets-container {
   width: 50%;
   margin: 10px auto;

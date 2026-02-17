@@ -1,0 +1,18 @@
+<div class="layout">
+  <nav class="sidebar">
+    <%= link_to "曲一覧へ", tweets_path %>
+    <%= link_to "新規投稿へ", new_tweet_path %>
+
+    <% if user_signed_in? %>
+      <%= link_to "マイページへ", user_path(current_user.id) %>
+    <% else %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+  </nav>
+
+  <div class="main">
+    <div class="top-image">
+      <%= image_tag "IMG_3150.jpg", alt: "トップ画像" %>
+    </div>
+  </div>
+</div>
