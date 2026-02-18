@@ -15,5 +15,6 @@ class Users::SessionsController < Devise::SessionsController
     # 管理者なら通常ログイン
     super
   end
+respond_to :html, :turbo_stream
 end
 
