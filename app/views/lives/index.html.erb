@@ -1,0 +1,37 @@
+<div class="lives-container">
+  <h1 class="lives-title">LIVE INFORMATION</h1>
+
+  <% @lives.each do |live| %>
+  <div class="live-item">
+    <h2><%= live.title %></h2>
+    <p><%= live.date %></p>
+    <p><%= live.place %></p>
+    <p><%= live.description %></p>
+  </div>
+<% end %>
+</div>
+<h1>ライブ情報の登録</h1>
+
+<%= form_with model: @live, local: true do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :date, "日付" %>
+    <%= f.date_field :date %>
+  </div>
+
+  <div>
+    <%= f.label :place, "場所" %>
+    <%= f.text_field :place %>
+  </div>
+
+  <div>
+    <%= f.label :description, "説明" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <%= f.submit "登録する" %>
+<% end %>

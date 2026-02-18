@@ -1,36 +1,55 @@
-<%= stylesheet_link_tag 'index', :media => "all" %>
-<div class="tweets-container">
-<h3>曲一覧</h3>
-<%= link_to "新規投稿へ", new_tweet_path %>
-<div class="tweets-container">
-  <% if user_signed_in? %>
-  <%= link_to "マイページへ", user_path(current_user.id) %>
-  <% end %>
-  <% @tweets.each do |t| %>
-    <div class="tweet">
-      <% if t.image.attached? %>
-          <%= image_tag t.image, size: '250x200'%>
-      <% end %>
+<%= stylesheet_link_tag 'index', media: "all" %>
+
+<div class="songs-page">
+
+  <h3 class="page-title">曲一覧</h3>
 
 
-      <%= t.user.email %>
-      <%= t.songtitle %>
-      <%= t.jacket %>
-      <%= t.lyrics %>
-      <%= t.time %>
-      <%= link_to "詳細へ", tweet_path(t.id) %>
-      <%= link_to "編集する", edit_tweet_path(t.id) %>
-      <%= link_to "削除する", tweet_path(t.id), data: { turbo_method: :delete } %>
-    </div>
-  <% end %>
-</div>
-<%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
-    <% Tag.all.each do |t| %>
-        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+  <div class="songs-grid">
+    <% @tweets.each do |t| %>
+      <div class="song-card">
+
+        <% if t.image.attached? %>
+          <div class="song-image">
+            <%= image_tag t.image, size: '250x200' %>
+          </div>
+        <% end %>
+
+        <div class="song-info">
+          <p class="song-title"><%= t.songtitle %></p>
+          <p class="song-user">投稿者：<%= t.user.email %></p>
+          <p class="song-jacket">ジャケット：<%= t.jacket %></p>
+          <p class="song-lyrics">歌詞：<%= t.lyrics %></p>
+          <p class="song-time">時間：<%= t.time %></p>
+        </div>
+
+        <div class="song-actions">
+          <%= link_to "詳細", tweet_path(t.id), class: "btn detail" %>
+          <%= link_to "編集", edit_tweet_path(t.id), class: "btn edit" %>
+          <%= link_to "削除", tweet_path(t.id), data: { turbo_method: :delete }, class: "btn delete" %>
+        </div>
+
+      </div>
     <% end %>
-    <%= submit_tag '検索' %>
-<% end %>
-<%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
-    <%= text_field_tag :tag %>
-    <%= submit_tag 'タグを追加' %>
-<% end %>
+  </div>
+
+  <div class="tag-search">
+    <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
+      <ul class="tag-list">
+        <% Tag.all.each do |t| %>
+          <li>
+            <%= check_box :tag_ids, t.name %>
+            <%= t.name %>
+          </li>
+        <% end %>
+      </ul>
+      <%= submit_tag '検索', class: "btn search-btn" %>
+    <% end %>
+
+    <%= form_tag({controller:"tweets",action:"index"}, method: :get, class: "add-tag-form") do %>
+      <%= text_field_tag :tag, nil, placeholder: "タグ名を入力", class: "tag-input" %>
+      <%= submit_tag 'タグを追加', class: "btn add-tag-btn" %>
+    <% end %>
+  </div>
+
+</div>

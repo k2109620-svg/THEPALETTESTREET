@@ -34,6 +34,13 @@ User.create!(
       password:  "thepale0501",
       password_confirmation: "thepale0501",
       admin: true
+    },
+    {
+      name:  "かおる",
+      email: "kaerumoti13579@outlook.jp",
+      password:  "kk1234",
+      password_confirmation: "kk1234",
+      admin: true
     }
   ]
 )

@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "home/index"
-  devise_for :users
-  resources :users, only: [:show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,5 +12,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :tweets
+  get "home", to: "home#index"
+  get "lives/index"
+  get "lives/show"
+
+  resources :users, only: [:show], path: "members"
+  resources :tweets
   root 'home#index'
+  get "home", to: "home#index"
+
+  resources :lives, only: [:index, :show, :new, :create]
+  get "admin/menu" => "admin#menu", as: :admin_menu
+  devise_for :users, controllers: {
+  sessions: 'users/sessions'
+}
 end

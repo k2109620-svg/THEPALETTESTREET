@@ -1,13 +1,7 @@
 <div class="layout">
   <nav class="sidebar">
     <%= link_to "曲一覧へ", tweets_path %>
-    <%= link_to "新規投稿へ", new_tweet_path %>
-
-    <% if user_signed_in? %>
-      <%= link_to "マイページへ", user_path(current_user.id) %>
-    <% else %>
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+    <%= link_to "ライブ情報", lives_path %>
   </nav>
 
   <div class="main">
@@ -16,3 +10,65 @@
     </div>
   </div>
 </div>
+<body class="<%= controller.controller_name %>-<%= controller.action_name %>">
+<section class="members">
+  <h2>メンバー</h2>
+
+  <div class="member-list">
+    <div class="member">
+      <img src="/assets/IMG_3163.jpg" alt="member1">
+      <h3>けん</h3>
+      <p>担当：ギター</p>
+    </div>
+
+    <div class="member">
+      <img src="/assets/IMG_3165.jpg" alt="member2">
+      <h3>れいと</h3>
+      <p>担当：キーボード</p>
+    </div>
+
+    <div class="member">
+      <img src="/assets/IMG_3164.jpg" alt="member3">
+      <h3>かずき</h3>
+      <p>担当：ベース</p>
+    </div>
+
+    <div class="member">
+      <img src="/assets/IMG_3162.jpg" alt="member4">
+      <h3>しゅん</h3>
+      <p>担当：ドラム</p>
+    </div>
+  </div>
+</section>
+<section class="sns-links">
+  <h2>FOLLOW ME!</h2>
+
+  <div class="sns-list">
+    <a href="https://www.instagram.com/the_palette_street?igsh=MWhqbG10aHp0bDlyYw==" target="_blank">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://x.com/thepale0501?s=21&t=Eg7x_iokWvi9lsBwzczFJg" target="_blank">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+    <a href="https://www.youtube.com/@THEPALETTESTREET" target="_blank">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+    <a href="https://www.tiktok.com/@the.palette.street?_r=1&_t=ZS-941vRh1VDj2" target="_blank">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+  </div>
+</section>
+<section class="admin-menu">
+  <h3>管理者メニュー</h3>
+
+  <div class="admin-links">
+    <%= link_to "ログイン", new_user_session_path %>
+    <!-- 管理者ログイン時だけ表示される項目 -->
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to "新規投稿", new_tweet_path %>
+      <%= link_to "マイページ", user_path(current_user.id) %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <% end %>
+
+  </div>
+</section>
