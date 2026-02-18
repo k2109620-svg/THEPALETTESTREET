@@ -11,15 +11,12 @@ class Users::SessionsController < Devise::SessionsController
       flash[:alert] = "管理者のみログインできます"
 
       respond_to do |format|
-        format.html { redirect_to new_user_session_path }
-        format.turbo_stream { redirect_to new_user_session_path }
+        format.html { render :new, status: :unauthorized }
       end
 
       return
     end
 
     # 管理者なら通常ログイン
-    super
-  end
-  respond_to :html, :turbo_stream
+    super  end
 end
