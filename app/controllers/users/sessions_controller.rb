@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+  respond_to :html
   def create
     self.resource = warden.authenticate(auth_options)
     # ログイン失敗
