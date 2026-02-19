@@ -3,6 +3,7 @@ class AdminCreatorController < ApplicationController
 
   def make
     user = User.create!(
+      name: "Admin",
       email: "admin@example.com",
       password: "password123",
       password_confirmation: "password123",
