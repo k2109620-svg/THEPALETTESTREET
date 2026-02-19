@@ -38,7 +38,7 @@
       <ul class="tag-list">
         <% Tag.all.each do |t| %>
           <li>
-            <%= check_box :tag_ids, t.name %>
+            <%= check_box "tag_ids[]", t.name %>
             <%= t.name %>
           </li>
         <% end %>
