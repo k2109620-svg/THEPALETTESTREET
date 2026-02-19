@@ -28,5 +28,4 @@ Rails.application.routes.draw do
 
   # Admin
   get "admin/menu" => "admin#menu", as: :admin_menu
-  get "/make_admin", to: "admin_creator#make"
 end
